@@ -5,8 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.NotNull;
 
-
-import java.util.List;
+import java.util.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -23,7 +24,7 @@ public class PostProjectTaskEntityRequest {
     private Long projectMilestoneId;
 
     @Schema(description = "预算成本")
-    private Object budget;
+    private BigDecimal budget;
 
     @Schema(description = "任务标题")
     private String taskTitle;

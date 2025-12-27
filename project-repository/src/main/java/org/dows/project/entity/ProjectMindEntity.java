@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import org.dows.rade.crud.CrudEntity;
 
 import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
 @Data
 @EqualsAndHashCode(callSuper = true)

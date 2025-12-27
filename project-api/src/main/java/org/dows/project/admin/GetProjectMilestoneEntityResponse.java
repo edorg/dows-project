@@ -5,8 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.NotNull;
 
-
-import java.util.List;
+import java.util.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -26,10 +27,10 @@ public class GetProjectMilestoneEntityResponse {
     private String description;
 
     @Schema(description = "阶段预算")
-    private Object phaseBudget;
+    private BigDecimal phaseBudget;
 
     @Schema(description = "阶段成本")
-    private Object phaseCost;
+    private BigDecimal phaseCost;
 
     @Schema(description = "时间单位 [Year，Month，Day，Hour]")
     private String timeUnit;
