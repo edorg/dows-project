@@ -1,0 +1,24 @@
+package org.dows.project.admin;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@Schema(description = "GetProjectDemandPageRequest 对象")
+public class GetProjectDemandPageRequest {
+
+    @Schema(description = "项目ID")
+    private Long projectInstanceId;
+
+    @Schema(description = "项目开始时间")
+    private Object startTime;
+
+    @Schema(description = "项目截止时间")
+    private Object endTime;
+
+}
