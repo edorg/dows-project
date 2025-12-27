@@ -28,29 +28,35 @@ public class AdminProjectDemandRest{
     public void postEntity(@RequestBody PostProjectDemandEntityRequest postProjectDemandEntityRequest){
         
     }
+
     @PutMapping("admin/project/demand/entity")
     @Operation(summary = "更新")
     public void putEntity(@RequestBody PutProjectDemandEntityRequest putProjectDemandEntityRequest){
         
     }
+
     @GetMapping("admin/project/demand/list")
     @Operation(summary = "查询项目需求")
     public GetProjectDemandListResponse getList( GetProjectDemandListRequest getProjectDemandListRequest){
         return null;
     }
+
     @GetMapping("admin/project/demand/page")
     @Operation(summary = "项目需求分页")
     public GetProjectDemandPageResponse getPage( GetProjectDemandPageRequest getProjectDemandPageRequest){
         return null;
     }
+
     @GetMapping("admin/project/demand/entity")
     @Operation(summary = "详情")
     public GetProjectDemandEntityResponse getEntity( GetProjectDemandEntityRequest getProjectDemandEntityRequest){
         return null;
     }
+
     @DeleteMapping("admin/project/demand/entity")
     @Operation(summary = "删除")
     public void deleteEntity(@RequestBody DeleteProjectDemandEntityRequest deleteProjectDemandEntityRequest){
         
     }
+
 }

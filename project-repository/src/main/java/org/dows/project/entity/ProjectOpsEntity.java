@@ -17,11 +17,9 @@ public class ProjectOpsEntity extends CrudEntity<ProjectOpsEntity> {
     private Long projectOpsId;
     @Schema(title = "项目ID")
     private Long projectInstanceId;
-    @Schema(title = "脚本名称")
-    private String scriptName;
     @Schema(title = "脚本")
     private String script;
-    @Schema(title = "脚本类型[mvn-build,mvn-deploy,docker-build]")
+    @Schema(title = "脚本名称[mvn-build,mvn-deploy,docker-build]")
     private String scriptName;
     @Schema(title = "阶段")
     private Integer stage;

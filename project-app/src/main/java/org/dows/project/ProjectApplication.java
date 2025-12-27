@@ -4,8 +4,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"org.dows.project", "org.dows.rade.mock"})
 public class ProjectApplication{
     public static void main(String[] args) {
         Dotenv dotenv = Dotenv.configure()

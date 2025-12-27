@@ -26,24 +26,29 @@ public class AdminProjectMemberRest{
     public PostProjectMemberEntityResponse postEntity(@RequestBody PostProjectMemberEntityRequest postProjectMemberEntityRequest){
         return null;
     }
+
     @GetMapping("admin/project/member/entity")
     @Operation(summary = "查询项目成员")
     public GetProjectMemberEntityResponse getEntity( GetProjectMemberEntityRequest getProjectMemberEntityRequest){
         return null;
     }
+
     @GetMapping("admin/project/member/list")
     @Operation(summary = "项目成员列表")
     public GetProjectMemberListResponse getList( GetProjectMemberListRequest getProjectMemberListRequest){
         return null;
     }
+
     @GetMapping("admin/project/member/page")
     @Operation(summary = "项目成员分页")
     public GetProjectMemberPageResponse getPage( GetProjectMemberPageRequest getProjectMemberPageRequest){
         return null;
     }
+
     @DeleteMapping("admin/project/member/entity")
     @Operation(summary = "删除项目成员")
     public void deleteEntity(@RequestBody DeleteProjectMemberEntityRequest deleteProjectMemberEntityRequest){
         
     }
+
 }

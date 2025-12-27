@@ -26,24 +26,29 @@ public class AdminProjectTagRest{
     public PostProjectTagEntityResponse postEntity(@RequestBody PostProjectTagEntityRequest postProjectTagEntityRequest){
         return null;
     }
+
     @PutMapping("admin/project/tag/entity")
     @Operation(summary = "更新")
     public void putEntity(@RequestBody PutProjectTagEntityRequest putProjectTagEntityRequest){
         
     }
+
     @GetMapping("admin/project/tag/list")
     @Operation(summary = "查询项目下的标签信息")
     public GetProjectTagListResponse getList( GetProjectTagListRequest getProjectTagListRequest){
         return null;
     }
+
     @GetMapping("admin/project/tag/entity")
     @Operation(summary = "详情")
     public GetProjectTagEntityResponse getEntity( GetProjectTagEntityRequest getProjectTagEntityRequest){
         return null;
     }
+
     @DeleteMapping("admin/project/tag/entity")
     @Operation(summary = "删除")
     public void deleteEntity(@RequestBody DeleteProjectTagEntityRequest deleteProjectTagEntityRequest){
         
     }
+
 }

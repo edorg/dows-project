@@ -26,24 +26,29 @@ public class AdminProjectTaskRest{
     public PostProjectTaskEntityResponse postEntity(@RequestBody PostProjectTaskEntityRequest postProjectTaskEntityRequest){
         return null;
     }
+
     @PutMapping("admin/project/task/entity")
     @Operation(summary = "更新任务关联")
     public void putEntity(@RequestBody PutProjectTaskEntityRequest putProjectTaskEntityRequest){
         
     }
+
     @GetMapping("admin/project/task/list")
     @Operation(summary = "项目任务列表")
     public GetProjectTaskListResponse getList( 项目IDRequest 项目IDRequest){
         return null;
     }
+
     @GetMapping("admin/project/task/page")
     @Operation(summary = "项目任务分页")
     public GetProjectTaskPageResponse getPage( 项目IDRequest 项目IDRequest){
         return null;
     }
+
     @DeleteMapping("admin/project/task/entity")
     @Operation(summary = "删除")
     public void deleteEntity(@RequestBody DeleteProjectTaskEntityRequest deleteProjectTaskEntityRequest){
         
     }
+
 }

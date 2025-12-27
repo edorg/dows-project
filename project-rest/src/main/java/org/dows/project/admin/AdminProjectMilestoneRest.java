@@ -26,24 +26,29 @@ public class AdminProjectMilestoneRest{
     public PostProjectMilestoneEntityResponse postEntity(@RequestBody PostProjectMilestoneEntityRequest postProjectMilestoneEntityRequest){
         return null;
     }
+
     @PutMapping("admin/project/milestone/entity")
     @Operation(summary = "更新项目里程碑")
     public void putEntity(@RequestBody PutProjectMilestoneEntityRequest putProjectMilestoneEntityRequest){
         
     }
+
     @GetMapping("admin/project/milestone/entity")
     @Operation(summary = "获取项目里程碑")
     public GetProjectMilestoneEntityResponse getEntity( GetProjectMilestoneEntityRequest getProjectMilestoneEntityRequest){
         return null;
     }
+
     @DeleteMapping("admin/project/milestone/entity")
     @Operation(summary = "删除项目里程碑")
     public void deleteEntity(@RequestBody DeleteProjectMilestoneEntityRequest deleteProjectMilestoneEntityRequest){
         
     }
+
     @GetMapping("admin/project/milestone/list")
     @Operation(summary = "项目里程碑列表")
     public GetProjectMilestoneListResponse getList( GetProjectMilestoneListRequest getProjectMilestoneListRequest){
         return null;
     }
+
 }

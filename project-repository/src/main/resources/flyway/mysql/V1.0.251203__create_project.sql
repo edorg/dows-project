@@ -130,9 +130,8 @@ drop table if exists `project_ops`;
 CREATE TABLE IF NOT EXISTS `project_ops`(
     `project_ops_id` bigint(19) NOT NULL COMMENT '项目运维ID',
     `project_instance_id` bigint(19) DEFAULT NULL COMMENT '项目ID',
-    `script_name` varchar(64) DEFAULT NULL COMMENT '脚本名称',
     `script` varchar(64) DEFAULT NULL COMMENT '脚本',
-    `script_name` varchar(64) DEFAULT NULL COMMENT '脚本类型[mvn-build,mvn-deploy,docker-build]',
+    `script_name` varchar(64) DEFAULT NULL COMMENT '脚本名称[mvn-build,mvn-deploy,docker-build]',
     `stage` integer(11) DEFAULT NULL COMMENT '阶段',
     `revision` integer(11) DEFAULT NULL COMMENT '版本号',
     `app_id` varchar(64) DEFAULT NULL COMMENT '应用id',

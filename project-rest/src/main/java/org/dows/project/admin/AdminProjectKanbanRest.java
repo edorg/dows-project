@@ -24,19 +24,23 @@ public class AdminProjectKanbanRest{
     public PostProjectKanbanEntityResponse postEntity(@RequestBody PostProjectKanbanEntityRequest postProjectKanbanEntityRequest){
         return null;
     }
+
     @PutMapping("admin/project/kanban/entity")
     @Operation(summary = "更新项目看板")
     public PutProjectKanbanEntityResponse putEntity(@RequestBody PutProjectKanbanEntityRequest putProjectKanbanEntityRequest){
         return null;
     }
+
     @GetMapping("admin/project/kanban/list")
     @Operation(summary = "获取项目看板")
     public GetProjectKanbanListResponse getList( GetProjectKanbanListRequest getProjectKanbanListRequest){
         return null;
     }
+
     @DeleteMapping("admin/project/kanban/entity")
     @Operation(summary = "删除项目看板")
     public void deleteEntity(@RequestBody DeleteProjectKanbanEntityRequest deleteProjectKanbanEntityRequest){
         
     }
+
 }

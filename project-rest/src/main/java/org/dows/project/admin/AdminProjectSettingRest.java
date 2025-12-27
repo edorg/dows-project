@@ -25,19 +25,23 @@ public class AdminProjectSettingRest{
     public void postEntity(@RequestBody PostProjectSettingEntityRequest postProjectSettingEntityRequest){
         
     }
+
     @PostMapping("admin/project/setting/list")
     @Operation(summary = "项目设置信息列表")
     public PostProjectSettingListResponse postList(@RequestBody PostProjectSettingListRequest postProjectSettingListRequest){
         return null;
     }
+
     @GetMapping("admin/project/setting/entity")
     @Operation(summary = "详情")
     public GetProjectSettingEntityResponse getEntity( GetProjectSettingEntityRequest getProjectSettingEntityRequest){
         return null;
     }
+
     @DeleteMapping("admin/project/setting/entity")
     @Operation(summary = "删除")
     public void deleteEntity(@RequestBody DeleteProjectSettingEntityRequest deleteProjectSettingEntityRequest){
         
     }
+
 }
