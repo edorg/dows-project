@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDateTime;
+
 import java.util.List;
 
 @Data
@@ -47,7 +47,7 @@ public class PutProjectDocumentEntityRequest {
     private String format;
 
     @Schema(description = "文档类容")
-    private Object content;
+    private String content;
 
     @Schema(description = "文档类型[0:需求，1:汇报[日|周|月|年],2.....]")
     private Integer docType;

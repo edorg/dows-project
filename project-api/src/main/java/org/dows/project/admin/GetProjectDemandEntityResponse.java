@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDateTime;
+
 import java.util.List;
 
 @Data
@@ -26,7 +26,7 @@ public class GetProjectDemandEntityResponse {
     private String ossCode;
 
     @Schema(description = "需求描述文档")
-    private Object docment;
+    private String docment;
 
     @Schema(description = "优先级")
     private Integer priority;
