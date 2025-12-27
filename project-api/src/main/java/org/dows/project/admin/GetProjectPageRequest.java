@@ -19,9 +19,9 @@ public class GetProjectPageRequest {
     private String code;
 
     @Schema(description = "开始时间")
-    private Object startTime;
+    private LocalDateTime startTime;
 
     @Schema(description = "截止时间")
-    private Object endTime;
+    private LocalDateTime endTime;
 
 }

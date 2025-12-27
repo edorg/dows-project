@@ -37,13 +37,13 @@ public class GetProjectMemberEntityResponse {
     private String app_id;
 
     @Schema(description = "时间戳")
-    private Object createTime;
+    private LocalDateTime createTime;
 
     @Schema(description = "更新时间")
-    private Object updateTime;
+    private LocalDateTime updateTime;
 
     @Schema(description = "删除时间")
-    private Object deleteTime;
+    private LocalDateTime deleteTime;
 
     @Schema(description = "创建者ID")
     private Long createId;

@@ -28,9 +28,9 @@ public class PostProjectEntityRequest {
     private Integer scope;
 
     @Schema(description = "项目开始时间")
-    private Object startTime;
+    private LocalDateTime startTime;
 
     @Schema(description = "项目截止时间")
-    private Object endTime;
+    private LocalDateTime endTime;
 
 }

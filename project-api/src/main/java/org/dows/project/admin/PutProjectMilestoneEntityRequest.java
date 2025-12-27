@@ -34,9 +34,9 @@ public class PutProjectMilestoneEntityRequest {
     private Integer duration;
 
     @Schema(description = "开始时间")
-    private Object startTime;
+    private LocalDateTime startTime;
 
     @Schema(description = "结束时间")
-    private Object endTime;
+    private LocalDateTime endTime;
 
 }

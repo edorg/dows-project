@@ -31,22 +31,22 @@ public class GetProjectEntityResponse {
     private Integer scope;
 
     @Schema(description = "项目开始时间")
-    private Object startTime;
+    private LocalDateTime startTime;
 
     @Schema(description = "项目截止时间")
-    private Object endTime;
+    private LocalDateTime endTime;
 
     @Schema(description = "应用id")
     private String app_id;
 
     @Schema(description = "时间戳")
-    private Object createTime;
+    private LocalDateTime createTime;
 
     @Schema(description = "更新时间")
-    private Object updateTime;
+    private LocalDateTime updateTime;
 
     @Schema(description = "删除时间")
-    private Object deleteTime;
+    private LocalDateTime deleteTime;
 
     @Schema(description = "创建者ID")
     private Long createId;
