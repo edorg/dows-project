@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.dows.project.repository.ProjectDemandRepository;
 import org.springframework.web.bind.annotation.*;
 import org.dows.project.admin.PostProjectDemandEntityRequest;
 import org.dows.project.admin.PostProjectDemandEntityResponse;
@@ -18,21 +19,25 @@ import org.dows.project.admin.GetProjectDemandEntityResponse;
 import org.dows.project.admin.DeleteProjectDemandEntityRequest;
 import org.dows.project.admin.DeleteProjectDemandEntityResponse;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Tag(name = "AdminProjectDemandRest", description = "项目需求")
 @RestController
 public class AdminProjectDemandRest{
 
+    private final ProjectDemandRepository projectDemandRepository;
+
     @PostMapping("admin/project/demand/entity")
     @Operation(summary = "创建")
-    public void postEntity(@RequestBody PostProjectDemandEntityRequest postProjectDemandEntityRequest){
-        
+    public void postEntity(@RequestBody List<PostProjectDemandEntityRequest> postProjectDemandEntityRequest){
+        projectDemandRepository.saveBatch(postProjectDemandEntityRequest);
     }
 
     @PutMapping("admin/project/demand/entity")
     @Operation(summary = "更新")
-    public void putEntity(@RequestBody PutProjectDemandEntityRequest putProjectDemandEntityRequest){
-        
+    public void putEntity(@RequestBody List<PutProjectDemandEntityRequest> putProjectDemandEntityRequest){
+        projectDemandRepository.updateBatch(putProjectDemandEntityRequest);
     }
 
     @GetMapping("admin/project/demand/list")

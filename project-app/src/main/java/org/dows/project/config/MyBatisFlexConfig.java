@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MyBatisFlexConfig implements MyBatisFlexCustomizer {
 
+
     @Override
     public void customize(FlexGlobalConfig globalConfig) {
         // 开启审计功能
