@@ -1,6 +1,9 @@
 package org.dows.project.entity;
 
+import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
+import com.mybatisflex.core.keygen.KeyGenerators;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,7 +16,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = true)
 @Table("project_ops")
 public class ProjectOpsEntity extends CrudEntity<ProjectOpsEntity> {
-
+    @Id(keyType = KeyType.Generator, value = KeyGenerators.snowFlakeId)
     @Schema(title = "项目运维ID")
     private Long projectOpsId;
     @Schema(title = "项目ID")
