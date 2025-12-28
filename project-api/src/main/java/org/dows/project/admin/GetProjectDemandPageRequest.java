@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @Schema(description = "GetProjectDemandPageRequest 对象")
-public class GetProjectDemandPageRequest {
+public class GetProjectDemandPageRequest{
 
     @Schema(description = "项目ID")
     private Long projectInstanceId;

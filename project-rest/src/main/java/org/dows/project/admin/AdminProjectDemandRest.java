@@ -1,67 +1,60 @@
 package org.dows.project.admin;
 
+import com.mybatisflex.core.paginate.Page;
+import com.mybatisflex.core.query.QueryWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.dows.project.entity.ProjectDemandEntity;
 import org.dows.project.repository.ProjectDemandRepository;
 import org.springframework.web.bind.annotation.*;
-import org.dows.project.admin.PostProjectDemandEntityRequest;
-import org.dows.project.admin.PostProjectDemandEntityResponse;
-import org.dows.project.admin.PutProjectDemandEntityRequest;
-import org.dows.project.admin.PutProjectDemandEntityResponse;
-import org.dows.project.admin.GetProjectDemandListRequest;
-import org.dows.project.admin.GetProjectDemandListResponse;
-import org.dows.project.admin.GetProjectDemandPageRequest;
-import org.dows.project.admin.GetProjectDemandPageResponse;
-import org.dows.project.admin.GetProjectDemandEntityRequest;
-import org.dows.project.admin.GetProjectDemandEntityResponse;
-import org.dows.project.admin.DeleteProjectDemandEntityRequest;
-import org.dows.project.admin.DeleteProjectDemandEntityResponse;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @Tag(name = "AdminProjectDemandRest", description = "项目需求")
 @RestController
-public class AdminProjectDemandRest{
+public class AdminProjectDemandRest {
 
     private final ProjectDemandRepository projectDemandRepository;
 
     @PostMapping("admin/project/demand/entity")
     @Operation(summary = "创建")
-    public void postEntity(@RequestBody List<PostProjectDemandEntityRequest> postProjectDemandEntityRequest){
+    public void postEntity(@RequestBody List<PostProjectDemandEntityRequest> postProjectDemandEntityRequest) {
         projectDemandRepository.saveBatch(postProjectDemandEntityRequest);
     }
 
     @PutMapping("admin/project/demand/entity")
     @Operation(summary = "更新")
-    public void putEntity(@RequestBody List<PutProjectDemandEntityRequest> putProjectDemandEntityRequest){
+    public void putEntity(@RequestBody List<PutProjectDemandEntityRequest> putProjectDemandEntityRequest) {
         projectDemandRepository.updateBatch(putProjectDemandEntityRequest);
     }
 
     @GetMapping("admin/project/demand/list")
     @Operation(summary = "查询项目需求")
-    public GetProjectDemandListResponse getList( GetProjectDemandListRequest getProjectDemandListRequest){
+    public GetProjectDemandListResponse getList(GetProjectDemandListRequest getProjectDemandListRequest) {
         return null;
     }
 
     @GetMapping("admin/project/demand/page")
     @Operation(summary = "项目需求分页")
-    public GetProjectDemandPageResponse getPage( GetProjectDemandPageRequest getProjectDemandPageRequest){
-        return null;
+    public Page<GetProjectDemandPageResponse> getPage(GetProjectDemandPageRequest getProjectDemandPageRequest) {
+        Page<GetProjectDemandPageResponse> objectPage = Page.of(1, 10, 20);
+        objectPage.setRecords(projectDemandRepository
+                .listAs(QueryWrapper.create().from(ProjectDemandEntity.class), GetProjectDemandPageResponse.class));
+        return objectPage;
     }
 
     @GetMapping("admin/project/demand/entity")
     @Operation(summary = "详情")
-    public GetProjectDemandEntityResponse getEntity( GetProjectDemandEntityRequest getProjectDemandEntityRequest){
+    public GetProjectDemandEntityResponse getEntity(GetProjectDemandEntityRequest getProjectDemandEntityRequest) {
         return null;
     }
 
     @DeleteMapping("admin/project/demand/entity")
     @Operation(summary = "删除")
-    public void deleteEntity(@RequestBody DeleteProjectDemandEntityRequest deleteProjectDemandEntityRequest){
-        
+    public void deleteEntity(@RequestBody DeleteProjectDemandEntityRequest deleteProjectDemandEntityRequest) {
+
     }
 
 }
