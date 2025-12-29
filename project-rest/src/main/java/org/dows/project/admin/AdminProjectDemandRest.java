@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.dows.project.entity.ProjectDemandEntity;
 import org.dows.project.repository.ProjectDemandRepository;
+import org.dows.rade.crud.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,10 +39,11 @@ public class AdminProjectDemandRest {
 
     @GetMapping("admin/project/demand/page")
     @Operation(summary = "项目需求分页")
-    public Page<GetProjectDemandPageResponse> getPage(GetProjectDemandPageRequest getProjectDemandPageRequest) {
-        Page<GetProjectDemandPageResponse> objectPage = Page.of(1, 10, 20);
-        objectPage.setRecords(projectDemandRepository
-                .listAs(QueryWrapper.create().from(ProjectDemandEntity.class), GetProjectDemandPageResponse.class));
+    public Page<GetProjectDemandPageResponse> getPage(PageRequest pageRequest, GetProjectDemandPageRequest getProjectDemandPageRequest) {
+        Page<GetProjectDemandPageResponse> objectPage = Page.of(pageRequest.getPageNum(), pageRequest.getPageSize());
+        QueryWrapper queryWrapper = QueryWrapper.create().from(ProjectDemandEntity.class)
+                .orderBy(pageRequest.getOrderBys(ProjectDemandEntity.class));
+        projectDemandRepository.pageAs(objectPage, queryWrapper, GetProjectDemandPageResponse.class);
         return objectPage;
     }
 
