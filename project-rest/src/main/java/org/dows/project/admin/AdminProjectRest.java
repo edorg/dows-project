@@ -2,25 +2,8 @@ package org.dows.project.admin;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.dows.project.admin.PostProjectEntityRequest;
-import org.dows.project.admin.PostProjectEntityResponse;
-import org.dows.project.admin.PutProjectEntityRequest;
-import org.dows.project.admin.PutProjectEntityResponse;
-import org.dows.project.admin.GetProjectPageRequest;
-import org.dows.project.admin.GetProjectPageResponse;
-import org.dows.project.admin.GetProjectEntityRequest;
-import org.dows.project.admin.GetProjectEntityResponse;
-import org.dows.project.admin.DeleteProjectEntityRequest;
-import org.dows.project.admin.DeleteProjectEntityResponse;
-import org.dows.project.admin.PostProjectMemberRequest;
-import org.dows.project.admin.PostProjectMemberResponse;
-import org.dows.project.admin.GetProjectMemberRequest;
-import org.dows.project.admin.GetProjectMemberResponse;
-import org.dows.project.admin.DeleteProjectMemberRequest;
-import org.dows.project.admin.DeleteProjectMemberResponse;
 
 @RequiredArgsConstructor
 @Tag(name = "AdminProjectRest", description = "项目实例接口")
