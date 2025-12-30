@@ -23,4 +23,7 @@ public class PutProjectTagEntityRequest {
     @Schema(description = "标签颜色")
     private String tagColor;
 
+    @Schema(description = "版本号")
+    private Integer revision;
+
 }

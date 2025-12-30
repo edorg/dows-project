@@ -3,10 +3,7 @@ package org.dows.project.admin;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.validation.constraints.NotNull;
 
-import java.util.*;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -18,13 +15,13 @@ public class GetProjectPageResponse {
     private Long projectInstanceId;
 
     @Schema(description = "项目名")
-    private String name;
+    private String projectName;
 
     @Schema(description = "项目code")
-    private String code;
+    private String projectCode;
 
     @Schema(description = "项目描述")
-    private String descr;
+    private String description;
 
     @Schema(description = "项目icon")
     private String icon;

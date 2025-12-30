@@ -14,4 +14,7 @@ import java.time.LocalDateTime;
 @Schema(description = "PostProjectSettingEntityResponse 对象")
 public class PostProjectSettingEntityResponse {
 
+    @Schema(description = "项目设置ID")
+    private Long projectSettingId;
+
 }
