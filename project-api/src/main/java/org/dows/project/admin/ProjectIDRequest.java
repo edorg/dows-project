@@ -3,16 +3,13 @@ package org.dows.project.admin;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.validation.constraints.NotNull;
 
-import java.util.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @Schema(description = "项目IDRequest 对象")
-public class 项目IDRequest {
+public class ProjectIDRequest {
 
     @Schema(description = "项目里程碑ID")
     private Long projectMilestoneId;

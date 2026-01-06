@@ -47,6 +47,9 @@ public class ProjectSettingRepository extends CrudRepository<ProjectSettingDao, 
         }).collect(Collectors.toList());
         
         boolean saved = projectSettingDao.saveBatch(entities);
+        if (!saved) {
+            throw new RuntimeException("批量创建项目设置失败");
+        }
         
         return entities.stream().map(entity -> {
             PostProjectSettingEntityResponse response = new PostProjectSettingEntityResponse();
@@ -81,7 +84,10 @@ public class ProjectSettingRepository extends CrudRepository<ProjectSettingDao, 
             return entity;
         }).collect(Collectors.toList());
         
-        projectSettingDao.updateBatch(entities);
+        boolean updated = projectSettingDao.updateBatch(entities);
+        if (!updated) {
+            throw new RuntimeException("批量更新项目设置失败");
+        }
         
         return entities.stream().map(entity -> {
             PostProjectSettingEntityResponse response = new PostProjectSettingEntityResponse();
@@ -188,7 +194,10 @@ public class ProjectSettingRepository extends CrudRepository<ProjectSettingDao, 
             return entity;
         }).collect(Collectors.toList());
 
-        projectSettingDao.updateBatch(entities);
+        boolean updated = projectSettingDao.updateBatch(entities);
+        if (!updated) {
+            throw new RuntimeException("批量删除项目设置失败");
+        }
 
         return entities.stream().map(entity -> {
             PostProjectSettingEntityResponse response = new PostProjectSettingEntityResponse();

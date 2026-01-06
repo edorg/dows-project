@@ -13,5 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Schema(description = "PostProjectFlowEntityResponse 对象")
 public class PostProjectFlowEntityResponse {
+    @Schema(description = "项目流程ID")
+    private Long projectFlowId;
 
 }

@@ -15,19 +15,26 @@ import org.dows.project.admin.GetProjectEntityRequest;
 import org.dows.project.admin.GetProjectEntityResponse;
 import org.dows.project.admin.DeleteProjectEntityRequest;
 import org.dows.project.entity.ProjectInstanceEntity;
+import org.dows.project.entity.ProjectMindEntity;
 import org.dows.project.dao.ProjectInstanceDao;
+import org.dows.project.dao.ProjectMindDao;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.dows.project.entity.table.ProjectInstanceEntityTableDef.PROJECT_INSTANCE_ENTITY;
+import static org.dows.project.entity.table.ProjectMindEntityTableDef.PROJECT_MIND_ENTITY;
 
 @Component
 public class ProjectInstanceRepository extends CrudRepository<ProjectInstanceDao, ProjectInstanceEntity> {
 
     @Autowired
     private ProjectInstanceDao projectInstanceDao;
+
+    @Autowired
+    private ProjectMindDao projectMindDao;
 
     /**
      * 创建项目实例
@@ -46,6 +53,9 @@ public class ProjectInstanceRepository extends CrudRepository<ProjectInstanceDao
         entity.setCreateTime(LocalDateTime.now());
 
         boolean save = projectInstanceDao.save(entity);
+        if (!save) {
+            throw new RuntimeException("创建项目实例失败");
+        }
 
         PostProjectEntityResponse response = new PostProjectEntityResponse();
         response.setProjectInstanceId(entity.getProjectInstanceId());
@@ -74,6 +84,9 @@ public class ProjectInstanceRepository extends CrudRepository<ProjectInstanceDao
         }).collect(Collectors.toList());
         
         boolean saved = projectInstanceDao.saveBatch(entities);
+        if (!saved) {
+            throw new RuntimeException("批量创建项目实例失败");
+        }
         
         return entities.stream().map(entity -> {
             PostProjectEntityResponse response = new PostProjectEntityResponse();
@@ -110,7 +123,10 @@ public class ProjectInstanceRepository extends CrudRepository<ProjectInstanceDao
             }
         }
         
-        projectInstanceDao.update(entity);
+        boolean updated = projectInstanceDao.update(entity);
+        if (!updated) {
+            throw new RuntimeException("更新项目实例失败");
+        }
         
         PostProjectEntityResponse response = new PostProjectEntityResponse();
         response.setProjectInstanceId(entity.getProjectInstanceId());
@@ -150,7 +166,10 @@ public class ProjectInstanceRepository extends CrudRepository<ProjectInstanceDao
             return entity;
         }).collect(Collectors.toList());
         
-        projectInstanceDao.updateBatch(entities);
+        boolean updated = projectInstanceDao.updateBatch(entities);
+        if (!updated) {
+            throw new RuntimeException("批量更新项目实例失败");
+        }
         
         return entities.stream().map(entity -> {
             PostProjectEntityResponse response = new PostProjectEntityResponse();
@@ -199,6 +218,44 @@ public class ProjectInstanceRepository extends CrudRepository<ProjectInstanceDao
         // 执行分页查询
         pageAs(objectPage, queryWrapper, GetProjectPageResponse.class);
         
+        // 批量查询项目实例对应的脑图链接
+        List<Long> projectInstanceIds = objectPage.getRecords().stream()
+                .map(GetProjectPageResponse::getProjectInstanceId)
+                .collect(Collectors.toList());
+        
+        if (!projectInstanceIds.isEmpty()) {
+            // 查询每个项目实例的脑图（按创建时间倒序，取第一个）
+            QueryWrapper mindQueryWrapper = QueryWrapper.create()
+                    .from(ProjectMindEntity.class)
+                    .where(PROJECT_MIND_ENTITY.DELETE_TIME.isNull())
+                    .where(PROJECT_MIND_ENTITY.PROJECT_INSTANCE_ID.in(projectInstanceIds))
+                    .orderBy(PROJECT_MIND_ENTITY.CREATE_TIME.desc());
+            
+            List<ProjectMindEntity> mindEntities = projectMindDao.list(mindQueryWrapper);
+            
+            // 构建项目ID到脑图链接的映射（每个项目只保留第一个脑图）
+            Map<Long, String> mindUrlMap = mindEntities.stream()
+                    .collect(Collectors.toMap(
+                            ProjectMindEntity::getProjectInstanceId,
+                            ProjectMindEntity::getMindUrl,
+                            (existing, replacement) -> existing // 如果有多个，保留第一个
+                    ));
+            
+            // 设置脑图链接到 Response
+            objectPage.getRecords().forEach(response -> {
+                String mindUrl = mindUrlMap.get(response.getProjectInstanceId());
+                response.setMindUrl(mindUrl);
+            });
+        }
+        
+        // 设置数据：项目成员数和项目进度
+        objectPage.getRecords().forEach(response -> {
+            // TODO: 后续从 project_member 表查询实际成员数
+            response.setMemberCount(0);
+            // TODO: 后续从 project_instance 表的 progress 字段或相关表计算实际进度
+            response.setProgress(0);
+        });
+        
         return objectPage;
     }
 
@@ -231,6 +288,26 @@ public class ProjectInstanceRepository extends CrudRepository<ProjectInstanceDao
         response.setDeleteTime(entity.getDeleteTime());
         response.setCreateId(entity.getCreateId());
         response.setUpdateId(entity.getUpdateId());
+        
+        // 查询项目实例对应的脑图链接（按创建时间倒序，取第一个）
+        QueryWrapper mindQueryWrapper = QueryWrapper.create()
+                .from(ProjectMindEntity.class)
+                .where(PROJECT_MIND_ENTITY.DELETE_TIME.isNull())
+                .where(PROJECT_MIND_ENTITY.PROJECT_INSTANCE_ID.eq(entity.getProjectInstanceId()))
+                .orderBy(PROJECT_MIND_ENTITY.CREATE_TIME.desc());
+        
+        List<ProjectMindEntity> mindEntities = projectMindDao.list(mindQueryWrapper);
+        if (mindEntities != null && !mindEntities.isEmpty()) {
+            // 取第一个脑图的链接
+            response.setMindUrl(mindEntities.get(0).getMindUrl());
+        }
+        
+        // 设置假数据：项目成员数和项目进度
+        // TODO: 后续从 project_member 表查询实际成员数
+        response.setMemberCount(0);
+        // TODO: 后续从 project_instance 表的 progress 字段或相关表计算实际进度
+        response.setProgress(entity.getProgress() != null ? entity.getProgress() : 0);
+        
         return response;
     }
 
@@ -252,7 +329,10 @@ public class ProjectInstanceRepository extends CrudRepository<ProjectInstanceDao
             return entity;
         }).collect(Collectors.toList());
 
-        projectInstanceDao.updateBatch(entities);
+        boolean updated = projectInstanceDao.updateBatch(entities);
+        if (!updated) {
+            throw new RuntimeException("批量删除项目实例失败");
+        }
 
         return entities.stream().map(entity -> {
             PostProjectEntityResponse response = new PostProjectEntityResponse();

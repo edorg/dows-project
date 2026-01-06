@@ -26,9 +26,9 @@ public class ProjectMilestoneEntity extends CrudEntity<ProjectMilestoneEntity> {
     @Schema(title = "里程碑描述")
     private String description;
     @Schema(title = "阶段预算")
-    private Object phaseBudget;
+    private BigDecimal phaseBudget;
     @Schema(title = "阶段成本")
-    private Object phaseCost;
+    private BigDecimal phaseCost;
     @Schema(title = "时间单位 [Year，Month，Day，Hour]")
     private String timeUnit;
     @Schema(title = "相对时间长")

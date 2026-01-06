@@ -35,4 +35,13 @@ public class GetProjectPageResponse {
     @Schema(description = "项目截止时间")
     private LocalDateTime endTime;
 
+    @Schema(description = "脑图链接")
+    private String mindUrl;
+
+    @Schema(description = "项目成员数")
+    private Integer memberCount;
+
+    @Schema(description = "项目进度")
+    private Integer progress;
+
 }

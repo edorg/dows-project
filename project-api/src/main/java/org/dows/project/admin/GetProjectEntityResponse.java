@@ -3,10 +3,6 @@ package org.dows.project.admin;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.validation.constraints.NotNull;
-
-import java.util.*;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -55,5 +51,14 @@ public class GetProjectEntityResponse {
 
     @Schema(description = "更新者ID")
     private Long updateId;
+
+    @Schema(description = "项目成员数")
+    private Integer memberCount;
+
+    @Schema(description = "项目进度")
+    private Integer progress;
+
+    @Schema(description = "脑图链接")
+    private String mindUrl;
 
 }

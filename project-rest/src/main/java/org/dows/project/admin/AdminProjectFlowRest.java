@@ -2,45 +2,41 @@ package org.dows.project.admin;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.dows.project.admin.PostProjectFlowEntityRequest;
-import org.dows.project.admin.PostProjectFlowEntityResponse;
-import org.dows.project.admin.PutProjectFlowEntityRequest;
-import org.dows.project.admin.PutProjectFlowEntityResponse;
-import org.dows.project.admin.GetProjectFlowListRequest;
-import org.dows.project.admin.GetProjectFlowListResponse;
-import org.dows.project.admin.DeleteProjectFlowEntityRequest;
-import org.dows.project.admin.DeleteProjectFlowEntityResponse;
+import org.dows.project.repository.ProjectFlowRepository;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Tag(name = "AdminProjectFlowRest", description = "项目流程")
 @RestController
-public class AdminProjectFlowRest{
+public class AdminProjectFlowRest {
+
+    private final ProjectFlowRepository projectFlowRepository;
 
     @PostMapping("admin/project/flow/entity")
-    @Operation(summary = "新建项目流程")
-    public void postEntity(@RequestBody PostProjectFlowEntityRequest postProjectFlowEntityRequest){
-        
+    @Operation(summary = "批量新建项目流程")
+    public List<PostProjectFlowEntityResponse> postEntity(@RequestBody List<PostProjectFlowEntityRequest> requests) {
+        return projectFlowRepository.saveBatch(requests);
     }
 
     @PutMapping("admin/project/flow/entity")
-    @Operation(summary = "更新项目流程")
-    public void putEntity(@RequestBody PutProjectFlowEntityRequest putProjectFlowEntityRequest){
-        
+    @Operation(summary = "批量更新项目流程")
+    public List<PostProjectFlowEntityResponse> putEntity(@RequestBody List<PutProjectFlowEntityRequest> requests) {
+        return projectFlowRepository.updateBatch(requests);
     }
 
     @GetMapping("admin/project/flow/list")
     @Operation(summary = "获取项目流程")
-    public GetProjectFlowListResponse getList( GetProjectFlowListRequest getProjectFlowListRequest){
-        return null;
+    public List<GetProjectFlowListResponse> getList(GetProjectFlowListRequest request) {
+        return projectFlowRepository.list(request);
     }
 
     @DeleteMapping("admin/project/flow/entity")
-    @Operation(summary = "删除项目流程")
-    public void deleteEntity(@RequestBody DeleteProjectFlowEntityRequest deleteProjectFlowEntityRequest){
-        
+    @Operation(summary = "批量删除项目流程")
+    public List<PostProjectFlowEntityResponse> deleteEntity(@RequestBody List<DeleteProjectFlowEntityRequest> requests) {
+        return projectFlowRepository.removeById(requests);
     }
 
 }

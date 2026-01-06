@@ -47,6 +47,9 @@ public class ProjectTagRepository extends CrudRepository<ProjectTagDao, ProjectT
         }).collect(Collectors.toList());
         
         boolean saved = projectTagDao.saveBatch(entities);
+        if (!saved) {
+            throw new RuntimeException("批量创建项目标签失败");
+        }
         
         return entities.stream().map(entity -> {
             PostProjectTagEntityResponse response = new PostProjectTagEntityResponse();
@@ -81,7 +84,10 @@ public class ProjectTagRepository extends CrudRepository<ProjectTagDao, ProjectT
             return entity;
         }).collect(Collectors.toList());
         
-        projectTagDao.updateBatch(entities);
+        boolean updated = projectTagDao.updateBatch(entities);
+        if (!updated) {
+            throw new RuntimeException("批量更新项目标签失败");
+        }
         
         return entities.stream().map(entity -> {
             PostProjectTagEntityResponse response = new PostProjectTagEntityResponse();
@@ -191,7 +197,10 @@ public class ProjectTagRepository extends CrudRepository<ProjectTagDao, ProjectT
             return entity;
         }).collect(Collectors.toList());
 
-        projectTagDao.updateBatch(entities);
+        boolean updated = projectTagDao.updateBatch(entities);
+        if (!updated) {
+            throw new RuntimeException("批量删除项目标签失败");
+        }
 
         return entities.stream().map(entity -> {
             PostProjectTagEntityResponse response = new PostProjectTagEntityResponse();
